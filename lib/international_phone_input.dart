@@ -30,6 +30,10 @@ class InternationalPhoneInput extends StatefulWidget {
     return _InternationalPhoneInputState.getNormalizedPhoneNumber(number, iso);
   }
 
+  static Future<bool> isPhoneInvalid(String number, String iso) {
+    return _InternationalPhoneInputState.parsePhoneNumber(number, iso);
+  }
+
   @override
   _InternationalPhoneInputState createState() =>
       _InternationalPhoneInputState();
@@ -55,8 +59,6 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
 
   @override
   void initState() {
-    errorText = widget.errorText ?? 'Please enter a valid phone number';
-    hintText = widget.hintText ?? 'eg. 244056345';
     errorStyle = widget.errorStyle;
     hintSyle = widget.hintSyle;
     errorMaxLines = widget.errorMaxLines;
@@ -170,15 +172,12 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
                   return DropdownMenuItem<Country>(
                     value: value,
                     child: Container(
-                      padding: const EdgeInsets.only(bottom: 5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Image.asset(
-                            value.flagUri,
-                            width: 32.0,
-                            package: 'international_phone_input',
-                          ),
+                          Image.asset(value.flagUri, width: 20),
                           SizedBox(width: 4),
                           Text(value.dialCode)
                         ],
@@ -192,13 +191,11 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
           Flexible(
               child: TextField(
                 keyboardType: TextInputType.phone,
+                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                 controller: phoneTextController,
                 decoration: InputDecoration(
                     hintText: hintText,
-                    errorText: hasError ? errorText : null,
-                    hintStyle: hintSyle ?? null,
-                    errorStyle: errorStyle ?? null,
-                    errorMaxLines: errorMaxLines ?? 3,
+                    hintStyle: hintSyle ?? null
                 ),
               ))
         ],
