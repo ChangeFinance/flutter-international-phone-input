@@ -172,12 +172,11 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
                   return DropdownMenuItem<Country>(
                     value: value,
                     child: Container(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.only(bottom: 5.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Image.asset(value.flagUri, width: 20),
+                          Image.asset(value.flagUri, width: 32.0),
                           SizedBox(width: 4),
                           Text(value.dialCode)
                         ],
