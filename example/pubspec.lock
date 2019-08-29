@@ -128,8 +128,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "17ecf519d5ef4ac7e2a8dfdec844360dd63fd53f"
-      url: "git://github.com/niinyarko/flutter-international-phone-input"
+      resolved-ref: ebeb2efc26de6bde9544437742c98e0a54dfeb46
+      url: "git://github.com/ChangeFinance/flutter-international-phone-input.git"
     source: git
     version: "1.0.2"
   io:

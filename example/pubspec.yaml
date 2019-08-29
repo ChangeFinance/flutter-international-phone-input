@@ -26,7 +26,7 @@ dependencies:
 
   international_phone_input:
     git:
-      url: git://github.com/niinyarko/flutter-international-phone-input
+      url: git://github.com/ChangeFinance/flutter-international-phone-input.git
 
 dev_dependencies:
   flutter_test:
@@ -43,8 +43,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-    - flags/tg.png
 
   # To add assets to your application, add an assets section, like this:
 

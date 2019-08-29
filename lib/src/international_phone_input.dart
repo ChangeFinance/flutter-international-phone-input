@@ -181,9 +181,7 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
             decoration: InputDecoration(
               hintText: hintText,
               errorText: hasError ? errorText : null,
-              hintStyle: hintStyle ?? null,
-              errorStyle: errorStyle ?? null,
-              errorMaxLines: errorMaxLines ?? 3,
+              hintStyle: hintStyle ?? null
             ),
           ))
         ],
