@@ -2,15 +2,14 @@
 
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:international_phone_input/src/phone_service.dart';
-
 import 'country.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InternationalPhoneInput extends StatefulWidget {
-  final void Function(String phoneNumber, String internationalizedPhoneNumber,
+  final void Function(String phoneNumber,
+      String internationalizedPhoneNumber,
       String isoCode) onPhoneNumberChange;
   final String initialPhoneNumber;
   final String initialSelection;
@@ -19,6 +18,7 @@ class InternationalPhoneInput extends StatefulWidget {
   final TextStyle errorStyle;
   final TextStyle hintStyle;
   final int errorMaxLines;
+  final TextEditingController controller;
 
   InternationalPhoneInput(
       {this.onPhoneNumberChange,
@@ -28,7 +28,8 @@ class InternationalPhoneInput extends StatefulWidget {
       this.hintText,
       this.errorStyle,
       this.hintStyle,
-      this.errorMaxLines});
+      this.errorMaxLines,
+      this.controller});
 
   static Future<String> internationalizeNumber(String number, String iso) {
     return PhoneService.getNormalizedPhoneNumber(number, iso);
@@ -55,11 +56,11 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
 
   int errorMaxLines;
 
-  bool hasError = false;
+
 
   _InternationalPhoneInputState();
 
-  final phoneTextController = TextEditingController();
+   TextEditingController phoneTextController = TextEditingController();
 
   @override
   void initState() {
@@ -68,9 +69,10 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
     errorStyle = widget.errorStyle;
     hintStyle = widget.hintStyle;
     errorMaxLines = widget.errorMaxLines;
-
+    phoneTextController = widget.controller;
     phoneTextController.addListener(_validatePhoneNumber);
     phoneTextController.text = widget.initialPhoneNumber;
+
 
     _fetchCountryData().then((list) {
       Country preSelectedItem;
@@ -101,9 +103,7 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
       PhoneService.parsePhoneNumber(phoneText, selectedItem.code)
           .then((isValid) {
         setState(() {
-          hasError = !isValid;
         });
-
         if (widget.onPhoneNumberChange != null) {
           if (isValid) {
             PhoneService.getNormalizedPhoneNumber(phoneText, selectedItem.code)
@@ -180,8 +180,7 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
             controller: phoneTextController,
             decoration: InputDecoration(
               hintText: hintText,
-              errorText: hasError ? errorText : null,
-              hintStyle: hintStyle ?? null
+              hintStyle: hintStyle ?? null,
             ),
           ))
         ],
