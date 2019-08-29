@@ -16,7 +16,7 @@ class InternationalPhoneInput extends StatefulWidget {
   final String errorText;
   final String hintText;
   final TextStyle errorStyle;
-  final TextStyle hintSyle;
+  final TextStyle hintStyle;
   final int errorMaxLines;
 
   InternationalPhoneInput(
@@ -24,7 +24,7 @@ class InternationalPhoneInput extends StatefulWidget {
         this.initialPhoneNumber,
         this.initialSelection,
         this.errorText,
-        this.hintText,this.errorStyle, this.hintSyle, this.errorMaxLines});
+        this.hintText,this.errorStyle, this.hintStyle, this.errorMaxLines});
 
   static Future<String> internationalizeNumber(String number, String iso) {
     return _InternationalPhoneInputState.getNormalizedPhoneNumber(number, iso);
@@ -60,7 +60,7 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
   @override
   void initState() {
     errorStyle = widget.errorStyle;
-    hintSyle = widget.hintSyle;
+    hintSyle = widget.hintStyle;
     errorMaxLines = widget.errorMaxLines;
 
     phoneTextController.addListener(_validatePhoneNumber);
