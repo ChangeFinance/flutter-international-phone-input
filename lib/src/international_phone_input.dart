@@ -34,6 +34,10 @@ class InternationalPhoneInput extends StatefulWidget {
     return PhoneService.getNormalizedPhoneNumber(number, iso);
   }
 
+  static Future<bool> isPhoneValid(String number, String iso) {
+    return PhoneService.parsePhoneNumber(number, iso);
+  }
+
   @override
   _InternationalPhoneInputState createState() =>
       _InternationalPhoneInputState();
@@ -59,8 +63,8 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
 
   @override
   void initState() {
-    errorText = widget.errorText ?? 'Please enter a valid phone number';
-    hintText = widget.hintText ?? 'eg. 244056345';
+    errorText = widget.errorText ?? '';
+    hintText = widget.hintText ?? '';
     errorStyle = widget.errorStyle;
     hintStyle = widget.hintStyle;
     errorMaxLines = widget.errorMaxLines;
@@ -172,7 +176,7 @@ class _InternationalPhoneInputState extends State<InternationalPhoneInput> {
           ),
           Flexible(
               child: TextField(
-            keyboardType: TextInputType.phone,
+            keyboardType: TextInputType.number,
             controller: phoneTextController,
             decoration: InputDecoration(
               hintText: hintText,
